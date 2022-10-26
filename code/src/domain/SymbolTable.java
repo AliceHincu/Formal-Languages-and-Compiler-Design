@@ -4,11 +4,11 @@ public class SymbolTable {
     HashTable ST = new HashTable();
     int ST_POS = 0;
 
-    public void add(Object value) {
-        ST.add(value);
+    public void add(Object key) {
+        ST.put(key, ST_POS++);
     }
 
-    public void get(Integer key) {
+    public void get(Object key) {
         ST.get(key);
     }
 

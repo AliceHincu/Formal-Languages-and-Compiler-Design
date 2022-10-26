@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HashTable {
     private final double THRESHOLD = 0.7;
@@ -29,32 +28,36 @@ public class HashTable {
     }
 
 
-    // Adds a key value pair to hash
-    public void add(Object value) {
+    /**
+     * Maps the specified key to the specified value in this hashtable
+     * @param key - the identifier / constant
+     * @param value - the position in the Symbol Table
+     */
+    public void put(Object key, Integer value) {
         // Find head of chain for given key
-        int index = hashCode(value);
+        int index = hashCode(key);
         HashNode head = array.get(index);
 
         // special case for head
         if (head == null) {
-            array.set(index, new HashNode(index, value));
+            array.set(index, new HashNode(key, value));
             return;
         }
 
         // Check if key is already present
         while (head.next != null) {
-            if (head.value.equals(value))
+            if (head.key.equals(key))
                 return;
 
             head = head.next;
         }
 
-        if (head.value.equals(value))
+        if (head.key.equals(key))
             return;
 
 
         // Insert key at the beginning of the chain if it is not present
-        head.next = new HashNode(index, value);
+        head.next = new HashNode(key, value);
         size++;
 
         // If load factor goes beyond threshold, then double hash table size
@@ -64,8 +67,12 @@ public class HashTable {
     }
 
 
-    // Returns value for a key
-    public Object get(Integer key) {
+    /**
+     * Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+     * @param key
+     * @return
+     */
+    public Integer get(Object key) {
         // Find head of chain for given key
         int index = hashCode(key);
 
@@ -93,16 +100,19 @@ public class HashTable {
 
         for (HashNode headNode : temp) {
             while (headNode != null) {
-                this.add(headNode.value);
+                this.put(headNode.key, headNode.value);
                 headNode = headNode.next;
             }
         }
     }
 
-    private Integer hashCode(Object value) {
+    /**
+     * Returns the hash code value which is the sum of ascii characters % capacity
+     */
+    private Integer hashCode(Object key) {
         // char sum % capacity
         long sum = 0;
-        String string = value.toString();
+        String string = key.toString();
         for (int i = 0; i < string.length(); i++) {
             sum += string.charAt(i);
         }

@@ -1,14 +1,14 @@
 package domain;
 
 public class HashNode {
-    Integer key;
-    Object value;
+    Object key;
+    Integer value;
 
     // Reference to next node
     HashNode next;
 
     // Constructor
-    public HashNode(Integer key, Object value) {
+    public HashNode(Object key, Integer value) {
         this.key = key; // hashcode
         this.value = value;
     }
