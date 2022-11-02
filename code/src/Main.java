@@ -1,11 +1,14 @@
+import domain.ProgramInternalForm;
+import domain.Scanner;
 import domain.SymbolTable;
 
-public class Main {
-    public static void main(String[] args) {
-        SymbolTable ST = new SymbolTable();
+import java.io.IOException;
 
-        ST.add("ad");
-        ST.add("bc");
-        System.out.println(ST);
+public class Main {
+    public static void main(String[] args) throws IOException {
+        SymbolTable ST = new SymbolTable();
+        ProgramInternalForm PIF = new ProgramInternalForm();
+        Scanner scanner = new Scanner(ST, PIF);
+        scanner.scan("p1.txt");
     }
 }

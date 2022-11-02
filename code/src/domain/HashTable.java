@@ -1,13 +1,12 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class HashTable {
     private final double THRESHOLD = 0.7;
     private ArrayList<HashNode> array; // each slot contains the head of a linked list
     private int capacity;
     private int size;
-
 
     public HashTable() {
         array = new ArrayList<>();
@@ -30,10 +29,12 @@ public class HashTable {
 
     /**
      * Maps the specified key to the specified value in this hashtable
-     * @param key - the identifier / constant
+     * If key is already present, returns the position of existing element. If not, returns the new position.
+     *
+     * @param key   - the identifier / constant
      * @param value - the position in the Symbol Table
      */
-    public void put(Object key, Integer value) {
+    public Integer put(Object key, Integer value) {
         // Find head of chain for given key
         int index = hashCode(key);
         HashNode head = array.get(index);
@@ -41,19 +42,19 @@ public class HashTable {
         // special case for head
         if (head == null) {
             array.set(index, new HashNode(key, value));
-            return;
+            return value;
         }
 
         // Check if key is already present
         while (head.next != null) {
             if (head.key.equals(key))
-                return;
+                return head.value;
 
             head = head.next;
         }
 
         if (head.key.equals(key))
-            return;
+            return head.value;
 
 
         // Insert key at the beginning of the chain if it is not present
@@ -64,13 +65,15 @@ public class HashTable {
         if (loadFactor() >= THRESHOLD)
             resize();
 
+        return value;
     }
 
 
     /**
      * Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
-     * @param key
-     * @return
+     *
+     * @param key the identifier / constant
+     * @return the position if the identifier / constant exists, else return null
      */
     public Integer get(Object key) {
         // Find head of chain for given key
@@ -87,6 +90,21 @@ public class HashTable {
 
         // If key not found
         return null;
+    }
+
+    public SortedMap<Integer, String> getSortedNodes() {
+        SortedMap<Integer, String> elements = new TreeMap<>();
+        for (HashNode head : array) {
+            if (head == null)
+                continue;
+
+            while (head != null) {
+                elements.put(head.value, head.key.toString());
+                head = head.next;
+            }
+        }
+
+        return elements;
     }
 
     private void resize() {
