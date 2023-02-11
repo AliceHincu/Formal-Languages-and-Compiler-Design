@@ -1,0 +1,13 @@
+Hashtable with identifiers and constants 
+
+--------------------------
+    ST_POS     SYMBOL
+--------------------------
+         0          n
+         1          m
+         2        sum
+         3 current_number
+         4          0
+         5          i
+         6          1
+--------------------------

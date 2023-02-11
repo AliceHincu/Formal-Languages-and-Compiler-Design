@@ -1,0 +1,14 @@
+Hashtable with identifiers and constants 
+
+--------------------------
+    ST_POS     SYMBOL
+--------------------------
+         0          a
+         1          i
+         2   is_prime
+         3          0
+         4          2
+         5          1
+         6 "a_is_prime"
+         7 "a_is_not_prime"
+--------------------------
