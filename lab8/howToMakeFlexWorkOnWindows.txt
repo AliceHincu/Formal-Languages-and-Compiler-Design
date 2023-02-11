@@ -1,0 +1,5 @@
+1. https://thesvgway.wordpress.com/2013/10/09/how-to-compile-run-lex-yacc-programs-on-windows/
+2. Update Dev-C++ : https://stackoverflow.com/questions/12811762/dev-c-in-windows-8-gcc-internal-error
+3. Put new bin to path: C:\Program Files (x86)\Dev-Cpp\MinGW64\bin
+4. Put '%option noyywrap' on first line: https://stackoverflow.com/questions/1811125/undefined-reference-to-yywrap
+5. Do the command from the first step again
